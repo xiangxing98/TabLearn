@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>send Validate Code</title>
+	<script type="text/javascript">
+	window.onload=function(){
+	    var send=document.getElementById('send'),
+	        times=60,
+	        timer=null;
+	    send.onclick=function(){
+	      // 计时开始
+          if(timer){
+              clearInterval(timer);
+          }
+	      send.value=''+times+'秒后重试';
+	      clearInterval(timer);
+
+          timer = setInterval(function(){
+              if(times > 0){
+              	times--;
+                send.value=''+times+'秒后重试';
+                send.disabled=true;
+              }else{
+              	clearInterval(timer);
+                timer=null;
+                send.disabled=false;
+              	send.value='发送验证码';
+              }
+            },1000)
+
+	    }
+	}
+	</script>
+</head>
+<body>
+	<input type="button" id="send" value="发送验证码">
+</body>
+</html>
